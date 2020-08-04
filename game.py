@@ -86,7 +86,6 @@ def generate_next_boards(board):
 
 
 def is_victory(board):
-    flag = True
     for line in board:
         for piece in line:
             if piece is False:
@@ -99,7 +98,6 @@ def play(board):
     if len(possible_outcomes) == 0:
         return is_victory(board)
 
-    result = False
     for possible_outcome in possible_outcomes:
         if play(possible_outcome):
             # print("---")
