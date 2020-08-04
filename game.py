@@ -94,21 +94,18 @@ def is_victory(board):
     return True
 
 
-def play(board, memo=dict()):
-    compact = compact_board(board)
-    if compact in memo.keys():
-        return memo[compact], memo
-
+def play(board):
     possible_outcomes = generate_next_boards(board)
     if len(possible_outcomes) == 0:
-        return is_victory(board), memo
+        return is_victory(board)
 
     result = False
     for possible_outcome in possible_outcomes:
-        outcome, memo = play(possible_outcome, memo)
-        result = outcome or result
-    memo[compact] = result
-    return result, memo
+        if play(possible_outcome):
+            # print("---")
+            # print compact_board(possible_outcome)
+            return True
+    return False
 
 
 def main():
@@ -121,9 +118,8 @@ def main():
         [None,  None,  False, False, False, None,  None ],
         [None,  None,  False, False, False, None,  None ],
     ]
-    memo = dict()
 
-    result, memo = play(board, memo)
+    result = play(board)
     print(result)
 
 

@@ -134,7 +134,7 @@ class TestGameOperations(TestCase):
             [None,  None,  True, True, True, None,  None ],
             [None,  None,  True, True, True, None,  None ],
         ]
-        result, memo = play(board)
+        result = play(board)
         self.assertFalse(result)
 
         board = [
@@ -146,7 +146,7 @@ class TestGameOperations(TestCase):
             [None,  None,  True, False, True, None,  None ],
             [None,  None,  True, True, True, None,  None ],
         ]
-        result, memo = play(board)
+        result = play(board)
         self.assertFalse(result)
 
 
