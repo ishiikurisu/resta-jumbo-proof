@@ -4,9 +4,9 @@ from unittest import TestCase, main
 
 class TestGameOperations(TestCase):
     def compare_boards_after_generation(self, expected_boards, result_boards):
-        expected_boards_hash = [compact_board(b) for b in expected_boards]
-        result_boards_hash = [compact_board(b) for b in result_boards]
-        self.assertEqual(set(expected_boards), set(result_boards))
+        expected_boards_set = set(compact_board(b) for b in expected_boards)
+        result_boards_set = set(compact_board(b) for b in result_boards)
+        self.assertEqual(expected_boards_set, result_boards_set)
 
     def test_generating_next_states_is_correct(self):
         board = [
@@ -24,7 +24,15 @@ class TestGameOperations(TestCase):
                 [None,  None,  False, False, False, None,  None ],
                 [None,  None,  False, False, False, None,  None ],
                 [False, False, False, False, False, False, False],
+                [False, False, False, False, True,  True,  False],
+                [False, False, False, False, False, False, False],
+                [None,  None,  False, False, False, None,  None ],
+                [None,  None,  False, False, False, None,  None ],
+            ], [
+                [None,  None,  False, False, False, None,  None ],
+                [None,  None,  False, True,  False, None,  None ],
                 [False, False, False, True,  False, False, False],
+                [False, False, False, False, False, False, False],
                 [False, False, False, False, False, False, False],
                 [None,  None,  False, False, False, None,  None ],
                 [None,  None,  False, False, False, None,  None ],
@@ -32,7 +40,7 @@ class TestGameOperations(TestCase):
                 [None,  None,  False, False, False, None,  None ],
                 [None,  None,  False, False, False, None,  None ],
                 [False, False, False, False, False, False, False],
-                [False, False, False, True,  False, False, False],
+                [False, True,  True,  False, False, False, False],
                 [False, False, False, False, False, False, False],
                 [None,  None,  False, False, False, None,  None ],
                 [None,  None,  False, False, False, None,  None ],
@@ -40,17 +48,9 @@ class TestGameOperations(TestCase):
                 [None,  None,  False, False, False, None,  None ],
                 [None,  None,  False, False, False, None,  None ],
                 [False, False, False, False, False, False, False],
-                [False, False, False, True,  False, False, False],
-                [False, False, False, False, False, False, False],
-                [None,  None,  False, False, False, None,  None ],
-                [None,  None,  False, False, False, None,  None ],
-            ], [
-                [None,  None,  False, False, False, None,  None ],
-                [None,  None,  False, False, False, None,  None ],
                 [False, False, False, False, False, False, False],
                 [False, False, False, True,  False, False, False],
-                [False, False, False, False, False, False, False],
-                [None,  None,  False, False, False, None,  None ],
+                [None,  None,  False, True,  False, None,  None ],
                 [None,  None,  False, False, False, None,  None ],
             ],
         ]
