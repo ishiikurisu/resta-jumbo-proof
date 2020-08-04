@@ -89,10 +89,43 @@ def is_victory(board):
     flag = True
     for line in board:
         for piece in line:
-            if piece is not None:
-                flag = flag and piece
-    return flag
+            if piece is False:
+                return False
+    return True
+
+
+def play(board, memo=dict()):
+    compact = compact_board(board)
+    if compact in memo.keys():
+        return memo[compact], memo
+
+    possible_outcomes = generate_next_boards(board)
+    if len(possible_outcomes) == 0:
+        return is_victory(board), memo
+
+    result = False
+    for possible_outcome in possible_outcomes:
+        outcome, memo = play(possible_outcome, memo)
+        result = outcome or result
+    memo[compact] = result
+    return result, memo
+
+
+def main():
+    board = [
+        [None,  None,  False, False, False, None,  None ],
+        [None,  None,  False, False, False, None,  None ],
+        [False, False, False, False, False, False, False],
+        [False, False, False, True,  False, False, False],
+        [False, False, False, False, False, False, False],
+        [None,  None,  False, False, False, None,  None ],
+        [None,  None,  False, False, False, None,  None ],
+    ]
+    memo = dict()
+
+    result, memo = play(board, memo)
+    print(result)
 
 
 if __name__ == '__main__':
-    pass
+    main()

@@ -4,6 +4,6 @@ default: test
 test:
 	python3 test.py
 
-.PHONE: game
+.PHONY: game
 game:
 	python3 game.py

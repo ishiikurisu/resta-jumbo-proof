@@ -58,6 +58,18 @@ class TestGameOperations(TestCase):
         result_boards = generate_next_boards(board)
         self.compare_boards_after_generation(expected_boards, result_boards)
 
+        board = [
+            [None,  None,  True, True, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+            [True, True, True, True, True, True, True ],
+            [True, True, True, False, True, True, True],
+            [True, True, True, True, True, True, True],
+            [None,  None,  True, True, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+        ]
+        result_boards = generate_next_boards(board)
+        self.assertEqual(0, len(result_boards))
+
     def test_generate_next_states_from_border_is_correct(self):
         board = [
             [None,  None,  False, False, False, None,  None ],
@@ -111,6 +123,32 @@ class TestGameOperations(TestCase):
             [None,  None,  True, True, True, None,  None ],
         ]
         self.assertTrue(is_victory(board))
+
+    def test_can_play_game_properly(self):
+        board = [
+            [None,  None,  True, True, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+            [True, True, True, True, True, True, True ],
+            [True, True, True, False, True, True, True],
+            [True, True, True, False, True, True, True],
+            [None,  None,  True, True, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+        ]
+        result, memo = play(board)
+        self.assertFalse(result)
+
+        board = [
+            [None,  None,  True, True, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+            [True, True, True, True, True, True, True ],
+            [True, True, True, False, True, True, True],
+            [True, True, True, False, True, True, True],
+            [None,  None,  True, False, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+        ]
+        result, memo = play(board)
+        self.assertFalse(result)
+
 
 if __name__ == '__main__':
     main()
