@@ -58,6 +58,37 @@ class TestGameOperations(TestCase):
         result_boards = generate_next_boards(board)
         self.compare_boards_after_generation(expected_boards, result_boards)
 
+    def test_generate_next_states_from_border_is_correct(self):
+        board = [
+            [None,  None,  False, False, False, None,  None ],
+            [None,  None,  False, False, False, None,  None ],
+            [False, False, False, False, False, False, True ],
+            [False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False],
+            [None,  None,  False, False, False, None,  None ],
+            [None,  None,  False, False, False, None,  None ],
+        ]
+
+        expected_boards = [
+            [
+                [None,  None,  False, False, False, None,  None ],
+                [None,  None,  False, False, False, None,  None ],
+                [False, False, False, False, True,  True,  False],
+                [False, False, False, False, False, False, False],
+                [False, False, False, False, False, False, False],
+                [None,  None,  False, False, False, None,  None ],
+                [None,  None,  False, False, False, None,  None ],
+            ], [
+                [None,  None,  False, False, False, None,  None ],
+                [None,  None,  False, False, False, None,  None ],
+                [False, False, False, False, False, False, False],
+                [False, False, False, False, False, False, True ],
+                [False, False, False, False, False, False, True ],
+                [None,  None,  False, False, False, None,  None ],
+                [None,  None,  False, False, False, None,  None ],
+            ]
+        ]
+
 
 if __name__ == '__main__':
     main()
