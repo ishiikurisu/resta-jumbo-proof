@@ -89,6 +89,28 @@ class TestGameOperations(TestCase):
             ]
         ]
 
+    def test_victory_check_is_correct(self):
+        board = [
+            [None,  None,  False, False, False, None,  None ],
+            [None,  None,  False, False, False, None,  None ],
+            [False, False, False, False, False, False, True ],
+            [False, False, False, False, False, False, False],
+            [False, False, False, False, False, False, False],
+            [None,  None,  False, False, False, None,  None ],
+            [None,  None,  False, False, False, None,  None ],
+        ]
+        self.assertFalse(is_victory(board))
+
+        board = [
+            [None,  None,  True, True, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+            [True, True, True, True, True, True, True ],
+            [True, True, True, True, True, True, True],
+            [True, True, True, True, True, True, True],
+            [None,  None,  True, True, True, None,  None ],
+            [None,  None,  True, True, True, None,  None ],
+        ]
+        self.assertTrue(is_victory(board))
 
 if __name__ == '__main__':
     main()

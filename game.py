@@ -85,5 +85,14 @@ def generate_next_boards(board):
     return outlet
 
 
+def is_victory(board):
+    flag = True
+    for line in board:
+        for piece in line:
+            if piece is not None:
+                flag = flag and piece
+    return flag
+
+
 if __name__ == '__main__':
     pass
